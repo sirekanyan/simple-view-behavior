@@ -108,15 +108,19 @@ public class SimpleViewBehavior extends PercentageViewBehavior<View> {
         float newX = targetX == UNSPECIFIED_INT ? 0 : (targetX - mStartX) * percent;
         float newY = targetY == UNSPECIFIED_INT ? 0 : (targetY - mStartY) * percent;
 
-        // set scale
-        if (targetWidth != UNSPECIFIED_INT || targetHeight != UNSPECIFIED_INT) {
+        // set width scale
+        if (targetWidth != UNSPECIFIED_INT) {
             float newWidth = mStartWidth + ((targetWidth - mStartWidth) * percent);
-            float newHeight = mStartHeight + ((targetHeight - mStartHeight) * percent);
-
             child.setScaleX(newWidth / mStartWidth);
-            child.setScaleY(newHeight / mStartHeight);
             // make up position for scale change
             newX -= (mStartWidth - newWidth) / 2;
+        }
+
+        // set height scale
+        if (targetHeight != UNSPECIFIED_INT) {
+            float newHeight = mStartHeight + ((targetHeight - mStartHeight) * percent);
+            child.setScaleY(newHeight / mStartHeight);
+            // make up position for scale change
             newY -= (mStartHeight - newHeight) / 2;
         }
 
